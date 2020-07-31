@@ -1,0 +1,214 @@
+{%- from "templates/print_formats/standard_macros.html" import add_header -%}
+
+    <!-- {% set gl = frappe.get_list(doctype="GL Entry",  fields=["account", "party_type", "party", "debit", "credit", "remarks"], filters={"voucher_type": doc.doctype, "voucher_no": doc.name}) %}
+    {%- if not doc.get("print_heading") and not doc.get("select_print_heading")
+        and doc.set("select_print_heading", _("Sales Invoice")) -%}{%- endif -%}
+    {{ add_header(0, 1, doc, letter_head, no_letterhead, print_settings) }} -->
+    <div class="row margin-bottom">
+        <div class="col-xs-9">
+            <img src="/assets/erpnext/images/fg.jpg"  width="120px" height="40px">
+            <p>Authorized Marketer by FortuneGas Marketers</p>
+        </div>
+        <div class="col-xs-3">
+            <h2 style="margin-top:9px">Sales Invoice</h2>
+           <p style="margin-left: 38px;">Supplier Copy</p>
+        </div>
+    </div>
+    <div style="border:1px solid #d1d8dd;">
+        <div class="col-xs-6">
+            <table>
+                <tr><td><strong>Invoice Number: </strong></td><td>{{ doc.name}}</td></tr>
+                <tr><td><strong>Invoice Date: </strong></td><td>{{ doc.posting_date}}</td></tr>
+                <tr><td><strong>Supplier Name: </strong></td><td>{{ doc.company}}</td></tr>
+                <tr><td><strong>Address: </strong></td><td>{{ doc.company_address_display }}</td></tr>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            <table>
+                <tr><td><strong>Payment Status: </strong></td><td>{{ doc.status}}</td></tr>
+                <tr><td><strong>Ordered Date: </strong></td><td>{{ doc.posting_date}}</td></tr>
+                <tr><td><strong>Customer Name: </strong></td><td>{{ doc.customer }}</td></tr>
+                <tr><td><strong>Address: </strong></td><td>{{doc.address_display}}</td></tr>
+            </table>
+        </div>
+    </div>
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>SL</th>
+                <!-- <th>Item Code</th> -->
+                <th>Item Name</th>
+                <th>HSN Code</th>
+                <th>Per Kg</th>
+                <th>Quantity</th>
+                <th>CGST(9%)</th>
+                <th>SGST(9%)</th>
+                <th>Amount</th>
+            </tr>
+            {% for item in doc.items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.gst_hsn_code }}</td>
+                <td>{{ item.rate }}</td>
+                <td>{{ item.qty}}{{ item.uom }}</td>
+                {% for tax in doc.taxes %}
+                {% if tax.tax_amount_after_discount_amount!= 0 %}
+                <td>{{ tax.tax_amount_after_discount_amount }}</td>
+                {% endif %}
+                {% endfor %}
+                <td>{{ item.amount }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>Payment Balance:</th><td>5000</td>
+                <th>Mode of Payment:</th><td>Cash</td>
+                <th>Total Tax:</th><td>{{doc.total_taxes_and_charges}}</td>
+                <th>Net Total:</th><td>{{doc.rounded_total}}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-condensed">
+            <tr><td><strong> Amount (In Words): </strong></td><td>{{ doc.base_in_words }}</td></tr>
+        </table>
+    <!-- </div> -->
+    <!-- <div class="col-xs-6">
+        <table>
+                <tr><td><strong>Tax and Charges: </strong></td><td>{{doc.taxes_and_charges}}</td></tr>
+                {% for tax in doc.taxes %}
+                    {% if tax.tax_amount_after_discount_amount!= 0 %}
+                        <tr><td><strong>{{ tax.account_head }}: </strong></td><td>{{ tax.tax_amount_after_discount_amount }}</td></tr>
+                    {% endif %}
+                {% endfor %}
+                <tr><td><strong> Total Taxes and Charges: </strong></td><td>{{ doc.total_taxes_and_charges }}</td></tr>
+                <tr><td><strong> Grand Total: </strong></td><td>{{ doc.grand_total }}</td></tr>
+                <tr><td><strong>  In Words: </strong></td><td>{{ doc.base_in_words }}</td></tr>
+            </table>
+        </div>
+    </div> -->
+<!-- </div> -->
+<div style="border:1px solid #d1d8dd ; margin-top: -12px;">
+    <div class="col-xs-4">
+    <p style="margin-top: 68px;">{{doc.company}}-Signature</p>
+    </div>
+    <div class="col-xs-4">
+        <table class="table-condensed table-bordered">
+            <tr>
+            <th>Cylinder</th>
+            <th>Quantity</th>
+            </tr>
+            <tr>
+            <td>17kg</td>
+            <td>3</td>
+            </tr>
+            <tr>
+             <td>21kg</td>
+             <td>2</td>
+             </tr>
+        </table>
+     </div>
+    <div class="col-xs-4">
+        <p style="margin-top: 68px;">Customer / Receiver's-Signature</p>
+    </div>
+</div>
+<div>
+    <p class="text-center">This is a Computer Generated Invoice. Seal & Sign is not required</p>
+</div>
+<hr>
+
+{%- from "templates/print_formats/standard_macros.html" import add_header -%}
+
+    <!-- {% set gl = frappe.get_list(doctype="GL Entry",  fields=["account", "party_type", "party", "debit", "credit", "remarks"], filters={"voucher_type": doc.doctype, "voucher_no": doc.name}) %}
+    {%- if not doc.get("print_heading") and not doc.get("select_print_heading")
+        and doc.set("select_print_heading", _("Sales Invoice")) -%}{%- endif -%}
+    {{ add_header(0, 1, doc, letter_head, no_letterhead, print_settings) }} -->
+    <div class="row margin-bottom">
+        <div class="col-xs-9">
+            <img src="/assets/erpnext/images/fg.jpg"  width="120px" height="40px">
+            <p>Authorized Marketer by FortuneGas Marketers</p>
+        </div>
+        <div class="col-xs-3">
+           <h2 style="margin-top:9px">Sales Invoice</h2>
+           <p style="margin-left: 38px;">Customer Copy</p>
+        </div>
+    </div>
+    <div style="border:1px solid #d1d8dd;">
+        <div class="col-xs-6">
+            <table>
+                <tr><td><strong>Invoice Number: </strong></td><td>{{ doc.name}}</td></tr>
+                <tr><td><strong>Invoice Date: </strong></td><td>{{ doc.posting_date}}</td></tr>
+                <tr><td><strong>Supplier Name: </strong></td><td>{{ doc.company}}</td></tr>
+                <tr><td><strong>Address: </strong></td><td>{{ doc.company_address_display }}</td></tr>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            <table>
+                <tr><td><strong>Payment Status: </strong></td><td>{{ doc.status}}</td></tr>
+                <tr><td><strong>Ordered Date: </strong></td><td>{{ doc.posting_date}}</td></tr>
+                <tr><td><strong>Customer Name: </strong></td><td>{{ doc.customer }}</td></tr>
+                <tr><td><strong>Address: </strong></td><td>{{doc.address_display}}</td></tr>
+            </table>
+        </div>
+    </div>
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th>SL</th>
+            <!-- <th>Item Code</th> -->
+            <th>Item Name</th>
+            <th>HSN Code</th>
+            <th>Per Kg</th>
+            <th>Quantity</th>
+            <th>CGST(9%)</th>
+            <th>SGST(9%)</th>
+            <th>Amount</th>
+        </tr>
+        {% for item in doc.items %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.gst_hsn_code }}</td>
+            <td>{{ item.rate }}</td>
+            <td>{{ item.qty}}{{ item.uom }}</td>
+            {% for tax in doc.taxes %}
+            {% if tax.tax_amount_after_discount_amount!= 0 %}
+            <td>{{ tax.tax_amount_after_discount_amount }}</td>
+            {% endif %}
+            {% endfor %}
+            <td>{{ item.amount }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th>Payment Balance:</th><td>5000</td>
+            <th>Mode of Payment:</th><td>Cash</td>
+            <th>Total Tax:</th><td>{{doc.total_taxes_and_charges}}</td>
+            <th>Net Total:</th><td>{{doc.rounded_total}}</td>
+        </tr>
+    </table>
+        <table class="table-condensed table-bordered table ">
+            <tr><td><strong> Amount (In Words): </strong></td><td>{{ doc.base_in_words }}</td></tr>
+        </table> 
+<div style="border:1px solid #d1d8dd ; margin-top: -12px;">
+    <div class="col-xs-4">
+    <p style="margin-top: 68px;">{{doc.company}}-Signature</p>
+    </div>
+    <div class="col-xs-4">
+        <table class="table-condensed table-bordered margin-left:18px">
+            <tr>
+            <th>Cylinder</th>
+            <th>Quantity</th>
+            </tr>
+            <tr>
+            <td>17kg</td>
+            <td>3</td>
+            </tr>
+            <tr>
+             <td>21kg</td>
+             <td>2</td>
+             </tr>
+        </table>
+     </div>
+    <div class="col-xs-4">
+        <p style="margin-top: 68px;">Customer / Receiver's-Signature</p>
+    </div>
+</div>
+<div>
+    <p class="text-center">This is a Computer Generated Invoice. Seal & Sign is not required</p>
+</div>
