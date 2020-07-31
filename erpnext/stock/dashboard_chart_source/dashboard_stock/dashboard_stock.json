@@ -1,0 +1,13 @@
+{
+ "creation": "2020-07-29 08:12:57.039397",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart Source",
+ "idx": 0,
+ "modified": "2020-07-29 08:12:57.039397",
+ "modified_by": "Administrator",
+ "module": "Stock",
+ "name": "Dashboard Stock",
+ "owner": "Administrator",
+ "source_name": "Dashboard Stock",
+ "timeseries": 0
+}
